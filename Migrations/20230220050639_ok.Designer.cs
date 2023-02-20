@@ -12,7 +12,7 @@ using ProjectCMS.Data;
 namespace ProjectCMS.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230220043036_ok")]
+    [Migration("20230220050639_ok")]
     partial class ok
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
