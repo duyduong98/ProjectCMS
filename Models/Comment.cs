@@ -7,8 +7,8 @@ namespace ProjectCMS.Models
 {
     public class Comment
     {
-
-        
+        [Key]
+        public int CommenntID { get; set; }
         [Column(Order = 0)]
         [DisplayName("User")]
         [ForeignKey("UserId")]
