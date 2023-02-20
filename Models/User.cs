@@ -1,0 +1,32 @@
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ProjectCMS.Models
+{
+    public class User
+    {
+        [Key]
+        public int UserId { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public byte[] PasswordHash { get; set; }
+        public byte[] PasswordSalt { get; set; }
+        public string Phone { get; set; }
+        
+        public DateOnly DoB { get; set; }
+        public string Address { get; set; }
+        public string Avatar { get; set; }
+        public DateOnly AddedDate { get; set; }
+        public int Role { get; set; }
+        public string RefreshToken { get; set; } = string.Empty;
+        public DateOnly TokenCreate { get; set; }
+        public DateOnly TokenExpires { get; set; }
+
+        public int DepID { get; set; }
+        [ForeignKey("DepId")]
+        public Department Department { get; set; }
+
+        public ICollection<Comment> Comments { get; set; }
+        public ICollection<Interactions> Iteractions { get; set; }
+    }
+}
