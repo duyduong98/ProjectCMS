@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjectCMS.Migrations
 {
-    public partial class test : Migration
+    public partial class ok : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,34 +46,6 @@ namespace ProjectCMS.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Category",
-                columns: table => new
-                {
-                    CateId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AddedDate = table.Column<DateTime>(type: "date", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Category", x => x.CateId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Department",
-                columns: table => new
-                {
-                    DepId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Department", x => x.DepId);
                 });
 
             migrationBuilder.CreateTable(
@@ -239,139 +211,6 @@ namespace ProjectCMS.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Event",
-                columns: table => new
-                {
-                    EvId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    First_Closure = table.Column<DateTime>(type: "date", nullable: false),
-                    Last_Closure = table.Column<DateTime>(type: "date", nullable: false),
-                    CateId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Event", x => x.EvId);
-                    table.ForeignKey(
-                        name: "FK_Event_Category_CateId",
-                        column: x => x.CateId,
-                        principalTable: "Category",
-                        principalColumn: "CateId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "User",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PasswordHash = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    PasswordSalt = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DoB = table.Column<DateTime>(type: "date", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Avatar = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AddedDate = table.Column<DateTime>(type: "date", nullable: false),
-                    Role = table.Column<int>(type: "int", nullable: false),
-                    RefreshToken = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TokenCreate = table.Column<DateTime>(type: "date", nullable: false),
-                    TokenExpires = table.Column<DateTime>(type: "date", nullable: false),
-                    DepID = table.Column<int>(type: "int", nullable: false),
-                    DepId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_User", x => x.UserId);
-                    table.ForeignKey(
-                        name: "FK_User_Department_DepId",
-                        column: x => x.DepId,
-                        principalTable: "Department",
-                        principalColumn: "DepId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Idea",
-                columns: table => new
-                {
-                    IdeaId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Vote = table.Column<int>(type: "int", nullable: false),
-                    Viewed = table.Column<int>(type: "int", nullable: false),
-                    SubmitedDate = table.Column<DateTime>(type: "date", nullable: false),
-                    eId = table.Column<int>(type: "int", nullable: false),
-                    Event = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Idea", x => x.IdeaId);
-                    table.ForeignKey(
-                        name: "FK_Idea_Event_Event",
-                        column: x => x.Event,
-                        principalTable: "Event",
-                        principalColumn: "EvId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Comment",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    IdeaId = table.Column<int>(type: "int", nullable: false),
-                    AddedDate = table.Column<DateTime>(type: "date", nullable: false),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Comment", x => new { x.UserId, x.IdeaId, x.AddedDate });
-                    table.ForeignKey(
-                        name: "FK_Comment_Idea_IdeaId",
-                        column: x => x.IdeaId,
-                        principalTable: "Idea",
-                        principalColumn: "IdeaId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Comment_User_UserId",
-                        column: x => x.UserId,
-                        principalTable: "User",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Interactions",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    IdeaId = table.Column<int>(type: "int", nullable: false),
-                    Voted = table.Column<bool>(type: "bit", nullable: false),
-                    Viewed = table.Column<bool>(type: "bit", nullable: false),
-                    Vote = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Interactions", x => new { x.UserId, x.IdeaId });
-                    table.ForeignKey(
-                        name: "FK_Interactions_Idea_IdeaId",
-                        column: x => x.IdeaId,
-                        principalTable: "Idea",
-                        principalColumn: "IdeaId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Interactions_User_UserId",
-                        column: x => x.UserId,
-                        principalTable: "User",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -412,11 +251,6 @@ namespace ProjectCMS.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comment_IdeaId",
-                table: "Comment",
-                column: "IdeaId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_DeviceCodes_DeviceCode",
                 table: "DeviceCodes",
                 column: "DeviceCode",
@@ -426,21 +260,6 @@ namespace ProjectCMS.Migrations
                 name: "IX_DeviceCodes_Expiration",
                 table: "DeviceCodes",
                 column: "Expiration");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Event_CateId",
-                table: "Event",
-                column: "CateId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Idea_Event",
-                table: "Idea",
-                column: "Event");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Interactions_IdeaId",
-                table: "Interactions",
-                column: "IdeaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Keys_Use",
@@ -466,11 +285,6 @@ namespace ProjectCMS.Migrations
                 name: "IX_PersistedGrants_SubjectId_SessionId_Type",
                 table: "PersistedGrants",
                 columns: new[] { "SubjectId", "SessionId", "Type" });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_User_DepId",
-                table: "User",
-                column: "DepId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -491,13 +305,7 @@ namespace ProjectCMS.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Comment");
-
-            migrationBuilder.DropTable(
                 name: "DeviceCodes");
-
-            migrationBuilder.DropTable(
-                name: "Interactions");
 
             migrationBuilder.DropTable(
                 name: "Keys");
@@ -510,21 +318,6 @@ namespace ProjectCMS.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Idea");
-
-            migrationBuilder.DropTable(
-                name: "User");
-
-            migrationBuilder.DropTable(
-                name: "Event");
-
-            migrationBuilder.DropTable(
-                name: "Department");
-
-            migrationBuilder.DropTable(
-                name: "Category");
         }
     }
 }

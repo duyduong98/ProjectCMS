@@ -17,7 +17,7 @@ namespace ProjectCMS.Data
         }
         
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        /*protected override void OnModelCreating(ModelBuilder builder)
         {        
             builder.Entity<Comment>()
                 .HasKey(m => new { m.UserId, m.IdeaId,m.AddedDate });
@@ -26,6 +26,7 @@ namespace ProjectCMS.Data
             base.OnModelCreating(builder);
 
         }
+        */
         protected override void ConfigureConventions(ModelConfigurationBuilder builder)
         {
             builder.Properties<DateOnly>()
