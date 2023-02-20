@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjectCMS.Models
 {
     public class User
     {
+        [Key]
         public int UserId { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
@@ -20,7 +22,10 @@ namespace ProjectCMS.Models
         public DateTime TokenExpires { get; set; }
 
         public int DepID { get; set; }
-        [ForeignKey("Department")]
-        public Department department { get; set; }
+        [ForeignKey("DepId")]
+        public Department Department { get; set; }
+
+        public ICollection<Comment> Comments { get; set; }
+        public ICollection<Interactions> Iteractions { get; set; }
     }
 }

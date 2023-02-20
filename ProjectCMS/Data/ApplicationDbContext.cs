@@ -13,5 +13,13 @@ namespace ProjectCMS.Data
         {
 
         }
+
+        DbSet<Category> _categories { get; set; }
+        DbSet<Comment> _comments { get; set; }
+        DbSet<Department> _departments { get; set; }
+        DbSet<Event> _events { get; set; }
+        DbSet<Idea> _idea { get; set; }
+        DbSet<Interactions> _interactions { get; set; }
+        DbSet<User> _users { get; set; }
     }
 }

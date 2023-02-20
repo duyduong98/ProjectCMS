@@ -1,10 +1,11 @@
-﻿using System.ComponentModel;
+﻿using Duende.IdentityServer.EntityFramework.Entities;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjectCMS.Models
 {
-    public class Comment
+    public class Interactions
     {
         [Key]
         [Column(Order = 0)]
@@ -18,16 +19,13 @@ namespace ProjectCMS.Models
         [ForeignKey("IdeaId")]
         public int IdeaId { get; set; }
         public Idea Idea { get; set; }
-        [Key]
-        [Column(Order = 2)]
-        public DateTime AddedDate { get; set; }
 
-        public string Content { get; set; }
+        public bool Voted { get; set; }
+        public bool Viewed { get; set; }
+        public bool Vote { get; set; }
 
-        //[ForeignKey("IdeaId")]
-        //public Idea Idea { get; set; }
 
-        //[ForeignKey("UserId")]
-        //public User User { get; set; }
+        
+       
     }
 }
